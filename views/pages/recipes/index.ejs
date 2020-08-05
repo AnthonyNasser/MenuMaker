@@ -1,0 +1,29 @@
+<%- include('../../partials/header') %>
+
+<div class="container">
+    <h1>Browse Recipes</h1>
+    <% if (recipes) { %>
+        <div class="recipeContainer">
+            <% recipes.forEach(function(recipe){ %>
+                <div class="recipeCard">
+                    <h3>
+                        <i class="fa fa-book fa-fw"></i><%= recipe.dish_title %>
+                        <button class="moreInfo hvr-grow"><a href="/recipes/<%= recipe._id %>">
+                        <i class="fa fa-info fa-fw"></i></a></button>
+                    </h3>
+                    <h6>Recipe By: <%= recipe.user.username %></h6>
+                    <img src="<%= recipe.image %>" alt="recipe image">
+                    <% if (recipe.description) { %>
+                        <p><span class="leader"><i class="fa fa-user fa-fw"></i>Description:</span> <%= recipe.description %></p>
+                    <% } %>
+                    <p><span class="leader"><i class="fa fa-hourglass-start fa-fw"></i>Prep-Time:</span> <%= recipe.prep_time %></p>
+                    <p><span class="leader"><i class="fa fa-hourglass-half fa-fw"></i>Cook-Time:</span> <%= recipe.cook_time %></p>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+    <a href="/recipes/new"><button class="new hvr-grow">Add a Recipe<i class="fa fa-plus fa-fw"></i></button></a>
+</div>
+
+
+<%- include('../../partials/footer') %>

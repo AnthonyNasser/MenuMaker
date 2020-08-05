@@ -1,0 +1,27 @@
+<%- include('../../partials/header') %>
+
+<div class="container">
+    <h1>Browse Menus:</h1>
+    <div class="menuContainer">
+            <% menus.forEach(function(menu){ %>
+                <div class="menuCard">
+                    <a href="menus/<%= menu._id %>">
+                        <button class="menuButton hvr-grow">
+                            <i class="fa fa-utensils fa-fw"></i><%= menu.name %>
+                        </button>
+                    </a>
+                    <h6>Menu By: <%= menu.user.username %></h6>
+                    <% if (currentUser.username === menu.user.username) { %>
+                        <form class="smallForm" action="/menus/<%= menu._id %>?_method=DELETE" method="POST">
+                            <button type="button" class="edit"><a href="/menus/<%=menu._id%>/edit"><i class="fa fa-edit"></i>
+                            </a></button>
+                            <button class="delete"><i class="fa fa-trash"></i></button>
+                        </form>
+                    <% } %>
+                </div>
+            <% }); %>
+    </div>
+    <a href="/menus/new"><button class="new hvr-grow">Add Menu<i class="fa fa-plus fa-fw"></i></button></a>
+</div>
+
+<%- include('../../partials/footer') %>

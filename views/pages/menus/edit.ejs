@@ -1,0 +1,32 @@
+<%- include('../../partials/header') %>
+
+<div class="container">
+    <div class="menuCard">
+        <h1><%= menu.name %></h1>
+        <hr>
+        <h2>Recipes:</h2>
+        <button class="menuButton hvr-grow"><a href="/menus/<%= menu._id %>/recipes/new">Add a recipe</a></button>
+        <% if (menu.recipes) { %>
+            <% menu.recipes.forEach(function(recipe){ %>
+                <p><%= recipe.dish_title %></p>
+            <% }); %>
+        <% } %>
+        <h2>Quick Added Dishes:</h2>
+        <% if (menu.quickAdds) { %>
+            <ul>
+                <% menu.quickAdds.forEach(function(quickAdd){ %>
+                    <li><%= quickAdd %></li>
+                <% }); %>
+            </ul>
+        <% } %>
+        <form action="/menus/<%= menu._id %>?_method=PUT" method="POST">
+            <label for="menuName">Change Menu Name: </label>
+            <input type="text" id="menuName" value="<%= menu.name %>" name="menu[name]">
+            <label for="quickAdd">Quick Add a Dish:</label>
+            <input type="text" id="quickAdd" name="menu[quickAdd]" placeholder="Dish Name">
+            <button class="submit hvr-grow">SAVE MENU</button>
+        </form>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>

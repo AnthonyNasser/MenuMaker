@@ -1,0 +1,20 @@
+<%- include('../../partials/header') %>
+
+<div class="container">
+    <div class="card">
+        <h1>Login</h1>
+        <form action="/login" method="POST">
+            <label for="username">Username</label>
+            <input id="username" name="username" placeholder="Username" type="text" required />
+            <label for="password">Password</label>
+            <input type="password" placeholder="password" id="password" name="password" required />
+            <button class="submit hvr-grow">Log In!</button>
+        </form>
+        <a href="/register">
+            New User? Sign Up Here!
+            <i class="fa fa-check-square fa-fw" aria-hidden="true"></i>
+        </a>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>

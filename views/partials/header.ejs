@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hipponate</title>
+    <!-- Font Awesome Import -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/menus.css">
+    <link rel="stylesheet" href="/stylesheets/recipes.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h1>
+            <a href="/">
+                <i class="fa fa-hippo fa-fw"></i>HIPPONATE<div>
+                <span id="brand">Menu Maker</span>
+            </a>
+        </div>
+        </h1>
+        <a class="item" href="/"><i class="fa fa-home fa-fw"></i>Home</a>
+        <a class="item" href="/recipes"><i class="fa fa-book fa-fw"></i>Recipes</a>
+        <a class="item" href="/menus"><i class="fa fa-utensils fa-fw"></i>Menus</a>
+        <% if (!currentUser){ %>
+            <a class="item" href="/login"><i class="fa fa-user fa-fw"></i>Login</a>
+        <% } else { %>
+            <a class="item" href="/logout">
+            <span class="userName"><%= currentUser.username %></span>
+            <i class="fa fa-user fa-fw"></i>Logout
+            </a>
+        <% } %>
+
+    </nav>

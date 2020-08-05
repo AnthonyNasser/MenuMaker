@@ -1,0 +1,25 @@
+<%- include('../../partials/header') %>
+
+<div class="container">
+    <div class="menuCard">
+        <h1><%= menu.name %></h1>
+        <h5>Menu By: <%= menu.user.username %></h5>
+        <hr>
+        <h2>Recipes:</h2>
+        <% if (menu.recipes) { %>
+        <% menu.recipes.forEach(function(recipe){ %>
+        <p><%= recipe.dish_title %></p>
+        <% }); %>
+        <% } %>
+        <h2>Quick Added Dishes:</h2>
+        <% if (menu.quickAdds) { %>
+        <ul>
+            <% menu.quickAdds.forEach(function(quickAdd){ %>
+            <li><%= quickAdd %></li>
+            <% }); %>
+        </ul>
+        <% } %>
+    </div>
+</div>
+
+<%- include('../../partials/footer') %>

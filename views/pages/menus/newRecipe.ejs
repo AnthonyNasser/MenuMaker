@@ -1,0 +1,105 @@
+<%- include('../../partials/header') %>
+
+<div class="container">
+    <form action="/recipes/menus/<%=menu._id%>" method="POST">
+        <h1><i class="fa fa-birthday-cake fa-fw"></i>Create New Recipe</h1>
+        <input type="text" name=recipe[dish_title] placeholder="What is your dish called?" spellcheck="false" required>
+        <select name=recipe[prep_time] required>
+            <option>Est. time to prepare:</option>
+            <option>No prep required</option>
+            <option>5-10 minutes prep</option>
+            <option>10-20 minutes prep</option>
+            <option>20-30 minutes prep</option>
+            <option>30-40 minutes prep</option>
+            <option>40-50 minutes prep</option>
+            <option>50-60 minutes prep</option>
+            <option>60-70 minutes prep</option>
+            <option>70-80 minutes prep</option>
+            <option>80-90 minutes prep</option>
+            <option>90-100 minutes prep</option>
+            <option>100+ minutes prep</option>
+        </select>
+        <select name=recipe[cook_time] required>
+            <option>Est. time to cook:</option>
+            <option>Serve Cold</option>
+            <option>5-10 minutes to cook</option>
+            <option>10-20 minutes to cook</option>
+            <option>20-30 minutes to cook</option>
+            <option>30-40 minutes to cook</option>
+            <option>40-50 minutes to cook</option>
+            <option>50-60 minutes to cook</option>
+            <option>60-70 minutes to cook</option>
+            <option>70-80 minutes to cook</option>
+            <option>80-90 minutes to cook</option>
+            <option>90-100 minutes to cook</option>
+            <option>100+ minutes to cook</option>
+        </select>
+        <textarea name="recipe[description]" spellcheck="false" cols="30" rows="10"
+            placeholder="Describe your dish (optional)"></textarea>
+        <label for="ingr">Ingredients <button type="button" class="newIngr hvr-grow"><i
+                    class="fa fa-plus"></i></button></label>
+        <ul class="ingrField">
+            <li>
+                <input type="text" name="ingredients" placeholder="ex. Flour (3 cups)">
+            </li>
+        </ul>
+        <label for="steps">Steps
+            <button type="button" class="newStep hvr-grow">
+                <i class="fa fa-plus"></i>
+            </button>
+        </label>
+        <ul class="stepField">
+            <li><textarea name="recipe[steps]" id="steps" cols="30" rows="5" placeholder="Step 1"></textarea></li>
+        </ul>
+        <input type="text" name="recipe[image]" placeholder="URL to an image of the dish (optional)">
+        <button class="submit hvr-grow">SAVE RECIPE</button>
+    </form>
+</div>
+
+<script>
+    const addIngrButton = document.querySelector('.newIngr');
+    const ingrField = document.querySelector('.ingrField');
+    const addStepButton = document.querySelector('.newStep');
+    const stepField = document.querySelector('.stepField');
+
+    // prevent enter from submitting the form
+    document.onkeypress = function (event) {
+        if (event.keyCode == 13 || event.which == 13) {
+            addIngrButton.focus();
+            event.preventDefault();
+        }
+    };
+    // Adding an ingredient
+    addIngrButton.addEventListener('click', function () {
+        // Create ingredient input and set appropritate attributes
+        const newInput = document.createElement("input");
+        newInput.setAttribute('type', 'text');
+        newInput.setAttribute('name', 'recipe[ingredients]');
+        newInput.setAttribute('placeholder', 'New Ingredient');
+        newInput.setAttribute('spellcheck', 'false')
+        newInput.setAttribute('id', 'ingr');
+        // Create li that goes into ingredient ul
+        let newLi = document.createElement("li");
+        newLi.appendChild(newInput);
+        ingrField.appendChild(newLi);
+    });
+
+    // Adding a step
+    let stepCounter = 2; // keep track of amt. of steps on page, start at 2 because step 1 is on page default
+    addStepButton.addEventListener('click', function () {
+        // Create step text area for input and set appropriate attributes
+        const newTA = document.createElement('textarea');
+        newTA.setAttribute('name', 'recipe[steps]');
+        newTA.setAttribute('id', 'steps');
+        newTA.setAttribute('cols', '30');
+        newTA.setAttribute('rows', '5');
+        newTA.setAttribute('spellcheck', 'false')
+        newTA.setAttribute('placeholder', 'Step ' + stepCounter);
+        stepCounter++; // add one to step counter so the next step placeholder is accurate
+        // Create li that goes into step ul
+        let newLi = document.createElement("li");
+        newLi.appendChild(newTA);
+        stepField.appendChild(newLi);
+    });
+</script>
+<%- include('../../partials/footer') %>
