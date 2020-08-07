@@ -36,12 +36,12 @@ app.use((req, res, next) => {
 });
 
 // CONNECT TO DB
-const URI = process.env.ATLAS_URI;
-mongoose.connect(URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
+const ATLAS_URI = process.env.ATLAS_URI;
+mongoose.connect(ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
 const connection = mongoose.connection;
 
 connection.once('open', () => {
-    console.log('MONGODB SET UP WOOOOOOOO');
+    console.log('MongoDB Set up Locally');
 });
 
 
