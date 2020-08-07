@@ -1,11 +1,10 @@
 <%- include('../../partials/header') %>
 
 <div class="container">
-
     <div class="recipeContainerShow">
         <div class="recipeCard">
             <h3><i class="fa fa-book fa-fw"></i><%= recipe.dish_title %></h3>
-            <h6>Recipe By: <%= recipe.user.username %></h6>
+            <h6>Recipe By: <span class="user"><%= recipe.user.username %></span></h6>
             <img src="<%= recipe.image %>" alt="recipe image">
             <% if (recipe.description) { %>
             <p><span class="leader"><i class="fa fa-user fa-fw"></i>Description:</span> <%= recipe.description %></p>
@@ -33,11 +32,11 @@
                 </ul>
             <% } %>
             <% if (currentUser.username === recipe.user.username) { %>
-            <div class="container">
-                <form class="smallForm" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-                    <button class="delete"><a href="/recipes/<%= recipe._id %>"><i class="fa fa-trash"></i></a></button>
-                </form>
-            </div>
+                <div class="container">
+                    <form class="smallForm" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                        <button class="delete"><a href="/recipes/<%= recipe._id %>"><i class="fa fa-trash"></i></a></button>
+                    </form>
+                </div>
             <% } %>
         </div>
     </div>

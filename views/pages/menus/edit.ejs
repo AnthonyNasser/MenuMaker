@@ -5,10 +5,21 @@
         <h1><%= menu.name %></h1>
         <hr>
         <h2>Recipes:</h2>
-        <button class="menuButton hvr-grow"><a href="/menus/<%= menu._id %>/recipes/new">Add a recipe</a></button>
+        <button class="menuButton hvr-grow"><a href="/recipes/new">Add a recipe</a></button>
         <% if (menu.recipes) { %>
             <% menu.recipes.forEach(function(recipe){ %>
-                <p><%= recipe.dish_title %></p>
+                <div class="recipeCard">
+                    <h3>
+                        <i class="fa fa-book fa-fw"></i><%= recipe.dish_title %>
+                        <button class="moreInfo hvr-grow"><a href="/recipes/<%= recipe._id %>">
+                                <i class="fa fa-info fa-fw"></i></a></button>
+                    </h3>
+                    <% if (recipe.description) { %>
+                    <p><span class="leader"><i class="fa fa-user fa-fw"></i>Description:</span> <%= recipe.description %></p>
+                    <% } %>
+                    <p><span class="leader"><i class="fa fa-hourglass-start fa-fw"></i>Prep-Time:</span> <%= recipe.prep_time %></p>
+                    <p><span class="leader"><i class="fa fa-hourglass-half fa-fw"></i>Cook-Time:</span> <%= recipe.cook_time %></p>
+                </div>
             <% }); %>
         <% } %>
         <h2>Quick Added Dishes:</h2>

@@ -12,8 +12,13 @@ const menuSchema = new mongoose.Schema({
         type: String
     },
     recipes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Recipe"
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Recipe"
+        },
+        dish_title: {
+            type: String
+        }
     }],
     quickAdds: [{
         type: String

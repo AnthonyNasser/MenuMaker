@@ -3,8 +3,9 @@
 <div class="container">
     <div class="recipeCard form">
         <form action="/recipes" method="POST">
-            <h1><i class="fa fa-birthday-cake fa-fw"></i>Create New Recipe</h1>
-            <input type="text" name=recipe[dish_title] placeholder="What is your dish called?" spellcheck="false" required>
+            <h1><i class="fa fa-book fa-fw"></i>Create New Recipe</h1>
+            <label for="name">Name: </label>
+            <input id="name" type="text" name=recipe[dish_title] placeholder="What is your dish called?" spellcheck="false" required>
                     <select name=recipe[prep_time] required>
                         <option>Est. time to prepare:</option>
                         <option>No prep required</option>
@@ -35,14 +36,16 @@
                         <option>90-100 minutes to cook</option>
                         <option>100+ minutes to cook</option>
                     </select>
+            <label for="desc">Description:</label>
             <textarea 
             name="recipe[description]" 
+            id="desc"
             spellcheck="false"
-            cols="30" rows="10" placeholder="Describe your dish (optional)"></textarea>
+            cols="30" rows="5" placeholder="Describe your dish (optional)"></textarea>
             <label for="ingr">Ingredients <button type="button" class="newIngr hvr-grow"><i class="fa fa-plus"></i></button></label>
             <ul class="ingrField">
                 <li>
-                    <input type="text" name="recipe[ingredients]" placeholder="ex. Flour (3 cups)">
+                    <input spellcheck="false" type="text" name="recipe[ingredients]" placeholder="ex. Flour (3 cups)">
                 </li>
             </ul>
             <label for="steps">Steps
@@ -51,7 +54,7 @@
                 </button>
             </label>
             <ul class="stepField">
-                <li><textarea name="recipe[steps]" id="steps" cols="30" rows="5" placeholder="Step 1"></textarea></li>
+                <li><textarea spellcheck="false" name="recipe[steps]" id="steps" cols="30" rows="5" placeholder="Step 1"></textarea></li>
             </ul>
             <input type="text" name="recipe[image]" placeholder="URL to an image of the dish (optional)">
             <button class="submit hvr-grow">SAVE RECIPE</button>

@@ -75,7 +75,6 @@
 @media screen and (min-width: 960px){
      .recipeContainerShow {
         width: 45%;
-        font-size: 1.4em;
     }
     .recipeContainerShow .recipeCard img{
         max-width: 85%;

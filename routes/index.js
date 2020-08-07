@@ -20,7 +20,7 @@ router.get("/register", (req, res) => {
 
 // handle signup logic
 router.post("/register", (req, res) => {
-    let newUser = new User({ username: req.body.username, email: req.body.email });
+    let newUser = new User({ username: req.body.username.toLowerCase(), email: req.body.email.toLowerCase() });
     User.register(newUser, req.body.password, (err, createdUser) => {
         if (err) {
             console.log(err);

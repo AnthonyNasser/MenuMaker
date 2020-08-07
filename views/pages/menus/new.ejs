@@ -1,11 +1,13 @@
 <%- include('../../partials/header') %>
-    <div class="container">
-        <div class="menuCard">
-            <form action="/menus" method="POST">
-                <label for="menuName">Name your Menu:</label>
-                <input type="text" id="menuName" name="menu[name]" placeholder="My Home Cousine">
-                <button class="submit hvr-grow">Create Menu</button>
-            </form>
-        </div>
+
+<div class="container">
+    <div class="menuCard">
+        <form action="/menus" method="POST">
+            <label for="menuName">Name your Menu:</label>
+            <input type="text" id="menuName" name="menu[name]" placeholder="My Home Cousine">
+            <button class="submit hvr-grow">Create Menu</button>
+        </form>
     </div>
+</div>
+
 <%- include('../../partials/footer') %>

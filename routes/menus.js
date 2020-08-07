@@ -6,7 +6,6 @@ const express = require('express'),
 // CRUD ROUTES FOR MENUS
 // =====================
 
-
 // INDEX
 router.route('/').get((req, res) => {
     Menu.find({}, function (err, allMenus) {
@@ -30,10 +29,13 @@ router.post('/', isLoggedIn, (req, res) => {
             console.log(err);
             res.redirect('/')
         } else {
+            // associate user with menu
             menu.user.id = req.user._id;
             menu.user.username = req.user.username;
             menu.save();
-            console.log(menu);
+            // associate menu with user
+            req.user.menus.push(menu);
+            req.user.save();
             res.redirect('/menus');
         }
     });
@@ -63,11 +65,12 @@ router.put('/:id', isLoggedIn, (req, res) => {
    Menu.findByIdAndUpdate(req.params.id, req.body.menu, (err, updatedMenu) => {
        if (err) {
            console.log(err);
-           res.redirect();
+           res.redirect('/menus/' + req.params.id + '/edit');
        } else {
            updatedMenu.quickAdds.push(req.body.menu.quickAdd);
            updatedMenu.save();
-           res.redirect('/menus/' + req.params.id + '/edit');
+           // redirect to show
+           res.redirect('/menus/' + req.params.id);
        }
    });
 });
@@ -82,19 +85,6 @@ router.delete('/:id', isLoggedIn, (req, res) => {
         } else {
             // redirect to all menus
             res.redirect('/menus');
-        }
-    });
-});
-
-// NEW RECIPE FROM MENU ROUTE
-router.get('/:id/recipes/new', isLoggedIn, (req, res) => {
-    Menu.findById(req.params.id, function(err, menu) {
-        if (err) {
-            console.log(err);
-            // redirect to show page
-            res.redirect('/menus/' + req.params.id);
-        } else {
-            res.render('pages/menus/newRecipe', {menu, menu})
         }
     });
 });

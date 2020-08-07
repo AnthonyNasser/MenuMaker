@@ -11,6 +11,7 @@ require('dotenv').config();
 
 // BASE SETUP
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 app.set("view engine", "ejs");
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));

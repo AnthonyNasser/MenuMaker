@@ -1,29 +1,119 @@
 <%- include('../../partials/header') %>
 
-<div class="container">
-    <h1>Browse Recipes</h1>
-    <% if (recipes) { %>
+
+<% if (currentUser) { %>
+    <section id="myRecipes">
+        <div class="container">
+            <h1>My Recipes</h1>
+            <a class="subnav" href="#browseRecipes">Browse Community Recipes</a>
+            <% if (recipes) { %>
+                <div class="recipeContainer">
+                    <% recipes.forEach(function(recipe){ %>
+                        <% if (recipe.user.username === currentUser.username) { %>
+                            <div class="recipeCard">
+                                <h3>
+                                    <i class="fa fa-book fa-fw"></i><%= recipe.dish_title %>
+                                    <button class="moreInfo hvr-grow"><a href="/recipes/<%= recipe._id %>">
+                                    <i class="fa fa-info fa-fw"></i></a></button>
+                                </h3>
+                                <h6>Recipe By: <span class="user"><%= currentUser.username %></span></h6>
+                                <img src="<%= recipe.image %>" alt="recipe image">
+                                <% if (recipe.description) { %>
+                                    <p><span class="leader"><i class="fa fa-user fa-fw"></i>Description:</span> <%= recipe.description %></p>
+                                <% } %>
+                                <p><span class="leader"><i class="fa fa-hourglass-start fa-fw"></i>Prep-Time:</span> <%= recipe.prep_time %></p>
+                                <p><span class="leader"><i class="fa fa-hourglass-half fa-fw"></i>Cook-Time:</span> <%= recipe.cook_time %></p>
+                                <% if (currentUser) { %>
+                                    <form id="menuForm" action="" method="POST">
+                                        <select id="menuSelect">
+                                            <option>Add to a menu:</option>
+                                            <% if (currentUser.menus) { %>
+                                                <% currentUser.menus.forEach(function(menu){ %>
+                                                    <option value="/recipes/<%= recipe._id %>/menus/<%=menu._id%>">
+                                                        <span><%= menu.name %></span>
+                                                    </option>
+                                                <% }); %>
+                                            <% } %>
+                                        </select>
+                                    </form>
+                                    <button form="menuForm" class="submit hvr-grow" id="sendRecipeBtn">Send to Menu</button>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                </div>
+            <% } %>
+            <a href="/recipes/new"><button class="new hvr-grow">New Recipe<i class="fa fa-plus fa-fw"></i></button></a>
+        </div>
+    </section>
+
+    <hr>
+<% } %>
+
+<section id="browseRecipes">
+    <div class="container">
+        <h1>Browse Community Recipes:</h1>
+        <% if (currentUser) { %>
+            <a class="subnav" href="#myRecipes">My Recipes</a>
+        <% } %>
+        <% if (recipes) { %>
         <div class="recipeContainer">
             <% recipes.forEach(function(recipe){ %>
-                <div class="recipeCard">
-                    <h3>
-                        <i class="fa fa-book fa-fw"></i><%= recipe.dish_title %>
-                        <button class="moreInfo hvr-grow"><a href="/recipes/<%= recipe._id %>">
-                        <i class="fa fa-info fa-fw"></i></a></button>
-                    </h3>
-                    <h6>Recipe By: <%= recipe.user.username %></h6>
-                    <img src="<%= recipe.image %>" alt="recipe image">
-                    <% if (recipe.description) { %>
+                <% if ((currentUser) && (recipe.user.username !== currentUser.username)) { %>
+                    <div class="recipeCard">
+                        <h3>
+                            <i class="fa fa-book fa-fw"></i><%= recipe.dish_title %>
+                            <button class="moreInfo hvr-grow"><a href="/recipes/<%= recipe._id %>">
+                                    <i class="fa fa-info fa-fw"></i></a></button>
+                        </h3>
+                        <h6>Recipe By: <span class="user"><%= recipe.user.username %></span></h6>
+                        <img src="<%= recipe.image %>" alt="recipe image">
+                        <% if (recipe.description) { %>
                         <p><span class="leader"><i class="fa fa-user fa-fw"></i>Description:</span> <%= recipe.description %></p>
+                        <% } %>
+                        <p><span class="leader"><i class="fa fa-hourglass-start fa-fw"></i>Prep-Time:</span> <%= recipe.prep_time %>
+                        </p>
+                        <p><span class="leader"><i class="fa fa-hourglass-half fa-fw"></i>Cook-Time:</span> <%= recipe.cook_time %>
+                        </p>
+                        <% if (currentUser) { %>
+                            <form id="menuForm" action="" method="POST">
+                                <select id="menuSelect">
+                                    <option>Add to a menu:</option>
+                                    <% if (currentUser.menus) { %>
+                                    <% currentUser.menus.forEach(function(menu){ %>
+                                    <option value="/recipes/<%= recipe._id %>/menus/<%=menu._id%>">
+                                        <span><%= menu.name %></span>
+                                    </option>
+                                    <% }); %>
+                                    <% } %>
+                                </select>
+                            </form>
+                            <button form="menuForm" class="submit hvr-grow" id="sendRecipeBtn">Send to Menu</button>
+                        <% } %>
                     <% } %>
-                    <p><span class="leader"><i class="fa fa-hourglass-start fa-fw"></i>Prep-Time:</span> <%= recipe.prep_time %></p>
-                    <p><span class="leader"><i class="fa fa-hourglass-half fa-fw"></i>Cook-Time:</span> <%= recipe.cook_time %></p>
                 </div>
-            <% }); %>
-        </div>
-    <% } %>
-    <a href="/recipes/new"><button class="new hvr-grow">Add a Recipe<i class="fa fa-plus fa-fw"></i></button></a>
-</div>
+                <% }); %>
+            </div>
+        <% } %>
+    </div>
+</section>
 
+<script>
+    function sendRecipeToMenu() {
+        // Select Form, all options under the select, and the button
+        const menuForm = document.querySelector('#menuForm');
+        const menuSelect = document.querySelector('#menuSelect');
+        const sendRecipeBtn = document.querySelector('#sendRecipeBtn');
+        // Figure out which option is currently selected
+        document.addEventListener('input', function(event){
+            // run for the menuSelect only
+            if (event.target.id !== 'menuSelect') return;
+            // using the currently selected options value, set the forms action attribute accordingly
+            menuForm.setAttribute('action', event.target.value + '?_method=PUT');
+        }, false);
+    }
+
+    sendRecipeToMenu();
+</script>
 
 <%- include('../../partials/footer') %>

@@ -27,10 +27,14 @@ router.post('/', isLoggedIn, (req, res) => {
             console.log(err);
             res.redirect('/')
         } else {
+            // associate user with recipe
             recipe.user.id = req.user._id;
             recipe.user.username = req.user.username;
             recipe.save();
-            console.log(recipe);
+            // associate recipe with user
+            req.user.recipes.push(recipe);
+            req.user.save();
+            recipe.save();
             res.redirect('/recipes');
         }
     });
@@ -40,6 +44,30 @@ router.post('/', isLoggedIn, (req, res) => {
 router.get('/:id', isLoggedIn, (req, res) => {
     Recipe.findById(req.params.id, function(err, recipe){
         res.render('pages/recipes/show', {recipe: recipe});
+    });
+});
+
+// EDIT
+router.get('/:id/edit', isLoggedIn, (req, res) => {
+    Recipe.findById(req.params.id, (err, recipe) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/recipes/' + req.params.id + '/edit')
+        } else {
+            res.render('pages/recipes/edit', { recipe: recipe });
+        }
+    });
+});
+
+// UPDATE
+router.put('/:id', isLoggedIn, (req, res) => {
+    Recipe.findByIdAndUpdate(req.params.id, req.body.recipe, (err, updatedRecipe) => {
+        if (err) {
+            console.log(err);
+            res.redirect('/recipes/' + req.params.id + '/edit')
+        } else {
+            res.redirect('/recipes/' + req.params.id);
+        }
     });
 });
 
@@ -57,7 +85,7 @@ router.delete('/:id', isLoggedIn, (req, res) => {
     });
 });
 
-// ADD TO A MENU
+// ADD NEW RECIPE TO A MENU
 router.post('/menus/:menuId', isLoggedIn, (req, res) => {
     Recipe.create(req.body.recipe, function (err, recipe) {
         if (err) {
@@ -71,6 +99,25 @@ router.post('/menus/:menuId', isLoggedIn, (req, res) => {
                     menu.recipes.push(recipe);
                     menu.save();
                     res.redirect('/menus/' + req.params.menuId + '/edit');
+                }
+            });
+        }
+    });
+});
+
+// ADD EXISTING RECIPE TO A MENU
+router.put('/:id/menus/:menuId', isLoggedIn, (req, res) => {
+    Menu.findById(req.params.menuId, (err, menu) => {
+        if (err) {
+            console.log(err);
+        } else {
+            Recipe.findById(req.params.id, (err, recipe) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    menu.recipes.push(recipe);
+                    menu.save();
+                    res.redirect('/recipes');
                 }
             });
         }
