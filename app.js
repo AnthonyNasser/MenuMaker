@@ -8,7 +8,7 @@ const   express = require('express'),
         User = require("./models/user.model"),
         cors = require('cors')
 
-// require('dotenv').config();
+require('dotenv').config();
 
 // BASE SETUP
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -59,8 +59,10 @@ corsOptions = {
     origin: "Your FrontEnd Website URL",
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
+
 app.use(cors(corsOptions));
 
+const connection = mongoose.connection;
 connection.once('open', () => {
     console.log('MongoDB Set up Locally');
 });
