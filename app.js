@@ -7,7 +7,7 @@ const   express = require('express'),
         LocalStrategy = require("passport-local"),
         User = require("./models/user.model");
 
-// require('dotenv').config();
+require('dotenv').config();
 
 // BASE SETUP
 app.use(bodyParser.urlencoded({ extended: true }));
