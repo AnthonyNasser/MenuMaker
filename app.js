@@ -5,9 +5,10 @@ const   express = require('express'),
         bodyParser = require("body-parser"),
         passport = require("passport"),
         LocalStrategy = require("passport-local"),
-        User = require("./models/user.model");
+        User = require("./models/user.model"),
+        cors = require('cors')
 
-require('dotenv').config();
+// require('dotenv').config();
 
 // BASE SETUP
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,9 +37,29 @@ app.use((req, res, next) => {
 });
 
 // CONNECT TO DB
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
-const connection = mongoose.connection;
+const db = process.env.MONGODB_URL;
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(db, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true
+        });
+        console.log("MongoDB is Connected...");
+    } catch (err) {
+        console.error(err.message);
+        process.exit(1);
+    }
+};
+
+connectDB();
+
+// cors origin URL - Allow inbound traffic from origin
+corsOptions = {
+    origin: "Your FrontEnd Website URL",
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
 connection.once('open', () => {
     console.log('MongoDB Set up Locally');
