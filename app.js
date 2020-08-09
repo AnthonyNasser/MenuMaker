@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 // CONNECT TO DB
 // const ATLAS_URI = process.env.ATLAS_URI;
-mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
 const connection = mongoose.connection;
 
 connection.once('open', () => {
