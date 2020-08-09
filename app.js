@@ -7,7 +7,7 @@ const   express = require('express'),
         LocalStrategy = require("passport-local"),
         User = require("./models/user.model");
 
-require('dotenv').config();
+// require('dotenv').config();
 
 // BASE SETUP
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -36,8 +36,8 @@ app.use((req, res, next) => {
 });
 
 // CONNECT TO DB
-const ATLAS_URI = process.env.ATLAS_URI;
-mongoose.connect(ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
+// const ATLAS_URI = process.env.ATLAS_URI;
+mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false });
 const connection = mongoose.connection;
 
 connection.once('open', () => {
