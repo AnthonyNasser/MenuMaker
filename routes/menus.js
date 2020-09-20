@@ -7,7 +7,7 @@ const express = require('express'),
 // =====================
 
 // INDEX
-router.route('/').get((req, res) => {
+router.get('/', isLoggedIn, (req, res) => {
     Menu.find({}, function (err, allMenus) {
         if (err) {
             console.log(err);
@@ -77,17 +77,18 @@ router.put('/:id', isLoggedIn, (req, res) => {
 
 // DELETE 
 router.delete('/:id', isLoggedIn, (req, res) => {
-    Menu.findByIdAndRemove(req.params.id, function (err, menu) {
+    Menu.findByIdAndRemove(req.params.id, function(err, menu){
         if (err) {
             console.log(err);
-            // redirect to show page
-            res.redirect('/menus/' + req.params.id);
+            // redirect to home page
+            res.redirect('/');
         } else {
             // redirect to all menus
             res.redirect('/menus');
-        }
+        }   
     });
 });
+
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {

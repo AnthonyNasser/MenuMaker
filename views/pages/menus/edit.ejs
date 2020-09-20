@@ -1,43 +1,44 @@
 <%- include('../../partials/header') %>
 
-<div class="container">
-    <div class="menuCard">
-        <h1><%= menu.name %></h1>
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned container">
+        <h1 class="ui header"><%= menu.name %></h1>
         <hr>
-        <h2>Recipes:</h2>
-        <button class="menuButton hvr-grow"><a href="/recipes/new">Add a recipe</a></button>
-        <% if (menu.recipes) { %>
-            <% menu.recipes.forEach(function(recipe){ %>
-                <div class="recipeCard">
-                    <h3>
-                        <i class="fa fa-book fa-fw"></i><%= recipe.dish_title %>
-                        <button class="moreInfo hvr-grow"><a href="/recipes/<%= recipe._id %>">
-                                <i class="fa fa-info fa-fw"></i></a></button>
-                    </h3>
-                    <% if (recipe.description) { %>
-                    <p><span class="leader"><i class="fa fa-user fa-fw"></i>Description:</span> <%= recipe.description %></p>
-                    <% } %>
-                    <p><span class="leader"><i class="fa fa-hourglass-start fa-fw"></i>Prep-Time:</span> <%= recipe.prep_time %></p>
-                    <p><span class="leader"><i class="fa fa-hourglass-half fa-fw"></i>Cook-Time:</span> <%= recipe.cook_time %></p>
-                </div>
-            <% }); %>
-        <% } %>
-        <h2>Quick Added Dishes:</h2>
-        <% if (menu.quickAdds) { %>
-            <ul>
-                <% menu.quickAdds.forEach(function(quickAdd){ %>
-                    <li><%= quickAdd %></li>
-                <% }); %>
-            </ul>
-        <% } %>
-        <form action="/menus/<%= menu._id %>?_method=PUT" method="POST">
+        <h2 class="ui header">Add Recipes</h2>
+        <div class="ui top attached buttons">
+            <a class="ui medium positive button" href="/recipes/new"><i class="fa fa-plus fa-fw"></i>Create New Recipe</a>
+            <a class="ui medium primary button" href="/recipes"><i class="fa fa-external-link-alt fa-fw"></i>Browse Recipes</a>
+        </div>
+        <div class="ui vertical stripe segment">
+            <div class="ui middle aligned container">
+                <% if (menu.recipes) { %>
+                        <div class="ui link cards">
+                            <% menu.recipes.forEach(function(recipe){ %>
+                                <div class="card">
+                                    <div class="content">
+                                        <div class="header">
+                                            <a class="ui mini primary circular icon button" href="/recipes/<%= recipe._id %>">
+                                            <i class="fa fa-info"></i></a>
+                                            <%= recipe.dish_title %>
+                                        </div>
+                                        <div class="extra content">
+                                            <p><i class="fa fa-bread-slice fa-2x"></i></p>
+                                        </div>
+                                    </div>  
+                                </div>
+                            <% }); %>
+                        </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- <form action="/menus/<%= menu._id %>?_method=PUT" method="POST">
             <label for="menuName">Change Menu Name: </label>
             <input type="text" id="menuName" value="<%= menu.name %>" name="menu[name]">
             <label for="quickAdd">Quick Add a Dish:</label>
             <input type="text" id="quickAdd" name="menu[quickAdd]" placeholder="Dish Name">
             <button class="submit hvr-grow">SAVE MENU</button>
-        </form>
-    </div>
-</div>
+        </form> -->
 
 <%- include('../../partials/footer') %>

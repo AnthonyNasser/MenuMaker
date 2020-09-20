@@ -1,30 +1,46 @@
 <%- include('../partials/header.ejs') %>
-
-<div class="container">
-    <div class="jumbotron borders">
-        <h1>Welcome to the Menu Maker!</h1>
-        <p>
-            A simple way to create and share home-developed menus!
-        </p>
-    </div>
-    <div class="cardContainer"> 
-        <div class="card">
-            <img src="images/food1.jpg" alt="food">
-            <h2><i class="fa fa-book fa-fw"></i>Recipes</h2>
-            <p>Create your own recipes using the <a href="/recipes/new">RecipeMaker</a>, and share them with the world!</p>
-        </div>
-        <div class="card">
-            <img src="images/menu1.jpg" alt="food">
-            <h2><i class="fa fa-utensils fa-fw"></i>Menus</h2>
-            <p>Use your recipes to form long menus of options!</p>
-        </div>
-        <div class="card">
-            <img src="images/community1.jpg" alt="food">
-            <h2><i class="fa fa-address-book fa-fw"></i>Community</h2>
-            <p>Use other's recipes and menus to customize your own!</p>
-        </div>
-    </div>
+<div class="ui inverted teal vertical masthead center aligned segment">
+  <div class="ui text container">
+    <h1 class="ui inverted header">Welcome to the Menu-Maker</h1>
+    <h2>
+      Craft your own recipes or use ones made by others to form menus for meal
+      prepping, home-cooking, or retauranting!
+    </h2>
+    <a href="/register" target="_blank" class="ui huge violet button"
+      >Sign Me Up!</a
+    >
+  </div>
 </div>
 
+<div class="ui vertical stripe segment">
+  <div class="ui middle aligned stackable grid container">
+    <div class="row">
+      <div class="eight wide column">
+        <h3 class="ui header">For all your recipe making needs!</h3>
+        <p>
+          Use Menu-Maker's recipe maker to craft recipes that go into just as
+          much detail as you entail!
+        </p>
+        <h3 class="ui header">Share your recipes with the world!</h3>
+        <p>
+          Any recipes you make are automatically viewable to every other
+          Menu-Maker user! Show others your Menu-Making skills!
+        </p>
+      </div>
+      <div class="six wide right floated column">
+        <img
+          src="https://images.unsplash.com/photo-1564759298141-cef86f51d4d4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+          class="ui large bordered rounded image"
+          id="home"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="center aligned column">
+        <a class="ui huge violet button">Show me some Menus!</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%- include('../partials/footer.ejs') %>

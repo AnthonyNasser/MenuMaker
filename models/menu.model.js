@@ -19,9 +19,6 @@ const menuSchema = new mongoose.Schema({
         dish_title: {
             type: String
         }
-    }],
-    quickAdds: [{
-        type: String
     }]
 });
 

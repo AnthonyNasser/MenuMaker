@@ -1,63 +1,77 @@
 <%- include('../../partials/header') %>
 
-<div class="container">
-    <div class="recipeCard form">
-        <form action="/recipes" method="POST">
-            <h1><i class="fa fa-book fa-fw"></i>Create New Recipe</h1>
-            <label for="name">Name: </label>
-            <input id="name" type="text" name=recipe[dish_title] placeholder="What is your dish called?" spellcheck="false" required>
-                    <select name=recipe[prep_time] required>
-                        <option>Est. time to prepare:</option>
-                        <option>No prep required</option>
-                        <option>5-10 minutes prep</option>
-                        <option>10-20 minutes prep</option>
-                        <option>20-30 minutes prep</option>
-                        <option>30-40 minutes prep</option>
-                        <option>40-50 minutes prep</option>
-                        <option>50-60 minutes prep</option>
-                        <option>60-70 minutes prep</option>
-                        <option>70-80 minutes prep</option>
-                        <option>80-90 minutes prep</option>
-                        <option>90-100 minutes prep</option>
-                        <option>100+ minutes prep</option>
-                    </select>
-                    <select name=recipe[cook_time] required>
-                        <option>Est. time to cook:</option>
-                        <option>Serve Cold</option>
-                        <option>5-10 minutes to cook</option>
-                        <option>10-20 minutes to cook</option>
-                        <option>20-30 minutes to cook</option>
-                        <option>30-40 minutes to cook</option>
-                        <option>40-50 minutes to cook</option>
-                        <option>50-60 minutes to cook</option>
-                        <option>60-70 minutes to cook</option>
-                        <option>70-80 minutes to cook</option>
-                        <option>80-90 minutes to cook</option>
-                        <option>90-100 minutes to cook</option>
-                        <option>100+ minutes to cook</option>
-                    </select>
-            <label for="desc">Description:</label>
-            <textarea 
-            name="recipe[description]" 
-            id="desc"
-            spellcheck="false"
-            cols="30" rows="5" placeholder="Describe your dish (optional)"></textarea>
-            <label for="ingr">Ingredients <button type="button" class="newIngr hvr-grow"><i class="fa fa-plus"></i></button></label>
-            <ul class="ingrField">
-                <li>
-                    <input spellcheck="false" type="text" name="recipe[ingredients]" placeholder="ex. Flour (3 cups)">
-                </li>
-            </ul>
-            <label for="steps">Steps
-                <button type="button" class="newStep hvr-grow">
-                    <i class="fa fa-plus"></i>
-                </button>
-            </label>
-            <ul class="stepField">
-                <li><textarea spellcheck="false" name="recipe[steps]" id="steps" cols="30" rows="5" placeholder="Step 1"></textarea></li>
-            </ul>
-            <input type="text" name="recipe[image]" placeholder="URL to an image of the dish (optional)">
-            <button class="submit hvr-grow">SAVE RECIPE</button>
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned container">
+        <form class="ui form" action="/recipes" method="POST">
+            <h1 class="ui header">Create New Recipe</h1>
+            <div class="field">
+                <label for="name">Name: </label>
+                <input id="name" type="text" name=recipe[dish_title] placeholder="What is your dish called?" spellcheck="false" required>
+            </div>
+            <div class="field">
+                <label>Preparation and Cook Time: </label>
+                <select class="ui dropdown" name=recipe[prep_time] required>
+                    <option>Est. time to prepare:</option>
+                    <option>No prep required</option>
+                    <option>5-10 minutes prep</option>
+                    <option>10-20 minutes prep</option>
+                    <option>20-30 minutes prep</option>
+                    <option>30-40 minutes prep</option>
+                    <option>40-50 minutes prep</option>
+                    <option>50-60 minutes prep</option>
+                    <option>60-70 minutes prep</option>
+                    <option>70-80 minutes prep</option>
+                    <option>80-90 minutes prep</option>
+                    <option>90-100 minutes prep</option>
+                    <option>100+ minutes prep</option>
+                </select>
+                <select class="ui dropdown" name=recipe[cook_time] required>
+                    <option>Est. time to cook:</option>
+                    <option>Serve Cold</option>
+                    <option>5-10 minutes to cook</option>
+                    <option>10-20 minutes to cook</option>
+                    <option>20-30 minutes to cook</option>
+                    <option>30-40 minutes to cook</option>
+                    <option>40-50 minutes to cook</option>
+                    <option>50-60 minutes to cook</option>
+                    <option>60-70 minutes to cook</option>
+                    <option>70-80 minutes to cook</option>
+                    <option>80-90 minutes to cook</option>
+                    <option>90-100 minutes to cook</option>
+                    <option>100+ minutes to cook</option>
+                </select>
+            </div>
+            <div class="field">
+                <label for="desc">Description:</label>
+                <textarea 
+                name="recipe[description]" 
+                id="desc"
+                spellcheck="false"
+                cols="30" rows="5" placeholder="Describe your dish (optional)"></textarea>
+            </div>
+            <div class="field">
+                <label for="ingr">Ingredients <button type="button" class="newIngr ui mini circular primary icon button"><i class="fa fa-plus"></i></button></label>
+                <ul class="ingrField">
+                    <li>
+                        <input spellcheck="false" type="text" name="recipe[ingredients]" placeholder="ex. Flour (3 cups)">
+                    </li>
+                </ul>
+            </div>
+            <div class="field">
+                <label for="steps">Steps
+                    <button type="button" class="newStep ui mini primary circular icon button">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </label>
+                <ul class="stepField">
+                    <li><textarea spellcheck="false" name="recipe[steps]" id="steps" cols="30" rows="5" placeholder="Step 1"></textarea></li>
+                </ul>
+            </div>
+            <div class="field">
+                <label for="img">Image</label>
+                <input id="img" type="text" name="recipe[image]" placeholder="URL to an image of the dish (optional)">
+            </div>
+            <button class="ui big positive button">Save Recipe</button>
         </form>
     </div>
 </div>

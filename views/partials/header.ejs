@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MenuMaker</title>
-    <!-- Font Awesome Import -->
+    <!-- Imports -->
+    <link rel="stylesheet" href="/stylesheets/semantic.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <!-- Custom Styles -->
     <link rel="stylesheet" href="/stylesheets/main.css">
@@ -14,24 +15,53 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav>
-        <h1>
-            <a href="/">
-                <span id="brand">MenuMade</span>
-            </a>
-        </div>
-        </h1>
-        <a class="item" href="/"><i class="fa fa-home fa-fw"></i>Home</a>
-        <a class="item" href="/recipes"><i class="fa fa-book fa-fw"></i>Recipes</a>
-        <a class="item" href="/menus"><i class="fa fa-utensils fa-fw"></i>Menus</a>
-        <% if (!currentUser){ %>
-            <a class="item" href="/login"><i class="fa fa-user fa-fw"></i>Login</a>
-        <% } else { %>
-            <a class="item" href="/logout">
-                <span class="user"><%= currentUser.username %></span>
-            <i class="fa fa-user fa-fw"></i>Logout
-            </a>
-        <% } %>
+<!-- Navbar -->
+<div class="ui grid">
+	<!-- For Desktop -->
+	<div class="computer only row">
+		<div class="column">
+			<div class="ui inverted blue borderless menu">
+				<a class="header item"><i class="fa fa-clipboard-list fa-fw"></i>Menu-Maker</a>
+				<a class="item" href="/"><i class="fa fa-home fa-fw"></i>Home</a>
+                <a class="item" href="/recipes"><i class="fa fa-book fa-fw"></i>Recipes</a>
+                <a class="item" href="/menus"><i class="fa fa-utensils fa-fw"></i>Menus</a>
+                <% if (!currentUser){ %>
+                    <a class="right item" href="/login"><i class="fa fa-user fa-fw"></i>Login</a>
+                <% } else { %>
+                    <a class="right item" href="/logout">
+                        <span class="user"><%= currentUser.username %></span>
+                    <i class="fa fa-user fa-fw"></i>Logout
+                    </a>
+                <% } %>
+			</div>
+		</div>
+	</div>
+    
+    <!-- For tablet and mobile -->
+	 <div class="tablet mobile only row">
+		<div class="column">
+			<div class="ui inverted blue borderless menu">
+				<a id="mobile_item" class="item"><i class="fa fa-angle-double-right fa-2x"></i></a>
+			</div>
+		</div>
+	</div>
 
-    </nav>
+</div>
+
+<!-- Push it to the side when in mobile -->
+<div class="ui pushable segment">
+		<div class="ui sidebar vertical inverted blue borderless menu">
+			<a class="header item"><i class="fa fa-clipboard-list fa-fw"></i>Menu-Maker</a>
+				<a class="item" href="/"><i class="fa fa-home fa-fw"></i>Home</a>
+                <a class="item" href="/recipes"><i class="fa fa-book fa-fw"></i>Recipes</a>
+                <a class="item" href="/menus"><i class="fa fa-utensils fa-fw"></i>Menus</a>
+                <% if (!currentUser){ %>
+                    <a class="right item" href="/login"><i class="fa fa-user fa-fw"></i>Login</a>
+                <% } else { %>
+                    <a class="right item" href="/logout">
+                    <i class="fa fa-user fa-fw"></i>Logout
+                    </a>
+                <% } %>
+        </div>
+        <div class="pusher">
+            <div id="content" class="ui segment">

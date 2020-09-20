@@ -1,46 +1,116 @@
 <%- include('../../partials/header') %>
 
-<div class="container">
-    <div class="recipeContainerShow">
-        <div class="recipeCard">
-            <h3><i class="fa fa-book fa-fw"></i><%= recipe.dish_title %></h3>
-            <h6>Recipe By: <span class="user"><%= recipe.user.username %></span></h6>
-            <img src="<%= recipe.image %>" alt="recipe image">
-            <% if (recipe.description) { %>
-            <p><span class="leader"><i class="fa fa-user fa-fw"></i>Description:</span> <%= recipe.description %></p>
-            <% } %>
-            <p><span class="leader"><i class="fa fa-hourglass-start fa-fw"></i>Prep-Time:</span> <%= recipe.prep_time %></p>
-            <p><span class="leader"><i class="fa fa-hourglass-half fa-fw"></i>Cook-Time:</span> <%= recipe.cook_time %></p>
-            <% if (recipe.ingredients) { %>
-            <div>
-                <span class="leader"><i class="fa fa-shopping-basket fa-fw"></i>Ingredients:</span>
-                <ul>
-                    <% recipe.ingredients.forEach(function(ingredient){ %>
-                        <li><%= ingredient %></li>
-                    <% }); %>
-                </ul>
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+        <div class="row">
+            <div class="sixteen wide column">
+                <h1 class="ui header"><i class="fa fa-book fa-fw"></i><%= recipe.dish_title %></h1>
+                <h4 class="ui header"><span class="user"><%= recipe.user.username %></span></h4>
+                <img id="showImg" src="<%= recipe.image %>" alt="recipe image">
             </div>
-            <% } %>
-            <% if (recipe.steps) { %>
-                <span class="leader"><i class="fa fa-bars fa-fw"></i>Steps:</span>
-                <ul>
-                    <% var counter = 1 %>
-                    <% recipe.steps.forEach(function(step){ %>
-                    <li><span class="leader"><%= counter + ' ' %>:</span> <%= step %></li>
-                    <% counter ++ %>
-                    <% }); %>
-                </ul>
-            <% } %>
-            <% if (currentUser.username === recipe.user.username) { %>
-                <div class="container">
-                    <form class="smallForm" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
-                        <button class="delete"><a href="/recipes/<%= recipe._id %>"><i class="fa fa-trash"></i></a></button>
+        </div>
+        <hr>
+        <% if (recipe.description) { %>
+            <div class="row">
+                <div class="eight wide column">
+                    <p><i class="fa fa-book-open fa-fw"></i> <%= recipe.description %></p>
+                </div>
+                <div class="eight wide column">
+                    <p><i class="fa fa-hourglass-start fa-fw"></i><%= recipe.prep_time %></p>
+                    <p><i class="fa fa-hourglass-half fa-fw"></i><%= recipe.cook_time %></p>
+                </div>
+            </div>
+            <div class="row">
+                <% if (recipe.ingredients) { %>
+                    <div class="six wide column">
+                        <h3 class="ui header">Ingredients</h3>
+                        <div class="ui divided list">
+                            <% recipe.ingredients.forEach(function(ingredient){ %>
+                                <div class="item">
+                                    <i class="fa fa-shopping-basket fa-fw"></i>
+                                    <div class="content">
+                                        <p><%= ingredient %></p>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+                <% if (recipe.steps) { %>
+                    <div class="ten wide column">
+                        <h3 class="ui header">Steps</h3>
+                        <div class="ui list">
+                            <% var counter = 1 %>
+                            <% recipe.steps.forEach(function(step){ %>
+                                <div class="item">
+                                    <div class="content">
+                                        <p><strong><%= counter + ' ' %> </strong><i class="fa fa-bars fa-fw"></i> <%= step %></p>
+                                    </div>
+                                </div>
+                                <% counter ++ %>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <hr>
+        <% } else { %>
+            <div class="row">
+                <div class="eight wide column">
+                    <p><i class="fa fa-book-open fa-fw"></i> No description is available for this recipe :( </p>
+                </div>
+                <div class="eight wide column">
+                    <p><i class="fa fa-hourglass-start fa-fw"></i><%= recipe.prep_time %></p>
+                    <p><i class="fa fa-hourglass-half fa-fw"></i><%= recipe.cook_time %></p>
+                </div>
+            </div>
+            <div class="row">
+                <% if (recipe.ingredients) { %>
+                    <div class="six wide column">
+                        <h3 class="ui header">Ingredients</h3>
+                        <div class="ui divided list">
+                            <% recipe.ingredients.forEach(function(ingredient){ %>
+                                <div class="item">
+                                    <i class="fa fa-shopping-basket fa-fw"></i>
+                                    <div class="content">
+                                        <p><%= ingredient %></p>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+                <% if (recipe.steps) { %>
+                    <div class="ten wide column">
+                        <h3 class="ui header">Steps</h3>
+                        <div class="ui list">
+                            <% var counter = 1 %>
+                            <% recipe.steps.forEach(function(step){ %>
+                                <div class="item">
+                                    <div class="content">
+                                        <p><strong><%= counter + ' ' %> </strong><i class="fa fa-bars fa-fw"></i> <%= step %></p>
+                                    </div>
+                                </div>
+                                <% counter ++ %>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <hr>
+        <% } %>
+        <% if (currentUser.username === recipe.user.username) { %>
+            <div class="row">
+                <div class="sixteen wide column">
+                    <form class="ui form" action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+                        <div class="ui buttons">
+                            <button type="submit" class="ui big red button" href="/recipes/<%= recipe._id %>"><i class="fa fa-trash"></i></button>
+                            <a type="button" class="edit ui big orange button" href="/recipes/<%= recipe._id %>/edit"><i class="fa fa-edit"></i></a>
+                        </div>
                     </form>
                 </div>
-            <% } %>
-        </div>
+            </div>
+        <% } %>
     </div>
 </div>
-
-
 <%- include('../../partials/footer') %>

@@ -2,54 +2,64 @@
 
 <% if (currentUser) { %>
     <section id="myMenus">
-        <div class="container">
-            <h1>My Menus:</h1>
-            <a class="subnav" href="#browseMenus">Browse Community Menus</a>
-            <div class="menuContainer">
-                <% menus.forEach(function(menu){ %>
-                <% if (menu.user.username !== currentUser.username) { %>
-                    <div class="menuCard">
-                        <a href="menus/<%= menu._id %>">
-                            <button class="menuButton hvr-grow">
-                                <i class="fa fa-utensils fa-fw"></i><%= menu.name %>
-                            </button>
-                        </a>
-                        <h6>Menu By: <span class="user"><%= menu.user.username %></span></h6>
-                        <% if ((currentUser) && (currentUser.username === menu.user.username)) { %>
-                        <form class="smallForm" action="/menus/<%= menu._id %>?_method=DELETE" method="POST">
-                            <button type="button" class="edit"><a href="/menus/<%=menu._id%>/edit"><i class="fa fa-edit"></i>
-                                </a></button>
-                            <button class="delete"><i class="fa fa-trash"></i></button>
-                        </form>
-                        <% } %>
+        <div class="ui vertical stripe segment">
+            <div class="ui middle aligned container">
+                <h1 class="ui header">My Menus</h1>
+                <a class="ui big positive top attached button" href="/menus/new"><i class="fa fa-plus fa-fw"></i>New Menu</a>
+                <% if (menus) { %>
+                    <div class="ui link cards">
+                        <% menus.forEach(function(menu){ %>
+                            <% if (menu.user.username == currentUser.username) { %>
+                                <div class="card">
+                                    <a class="ui big primary button" href="menus/<%= menu._id %>"><i class="fa fa-utensils"></i></a>
+                                    <div class="content">
+                                        <div class="header">
+                                            <h2 class="ui header"><%= menu.name %></h2>
+                                        </div>
+                                        <div class="meta">
+                                            <span class="user"><%= menu.user.username %></span>
+                                        </div>
+                                        <form class="ui form" action="/menus/<%= menu._id %>?_method=DELETE" method="POST">
+                                            <div class="ui buttons">
+                                                <button type="submit" class="delete ui small red button" href="/menus"><i class="fa fa-trash"></i></button>
+                                                <a type="button" class="ui small green button" href="/menus/<%= menu._id %>/edit"><i class="fa fa-plus"></i></a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% }); %>
                     </div>
                 <% } %>
-                <% }); %>
             </div>
-            <a href="/menus/new"><button class="new hvr-grow">Add Menu<i class="fa fa-plus fa-fw"></i></button></a>
-        </div>
+        </div> 
     </section>
-<hr>
 <% } %>
 
 
 <section id="browseMenus">
-    <div class="container">
-        <h1>Browse Community Menus:</h1>
-        <a class="subnav" href="#myMenus">My Menus</a>
-        <div class="menuContainer">
-                <% menus.forEach(function(menu){ %>
-                   <% if (menu.user.username !== currentUser.username) { %>
-                        <div class="menuCard">
-                            <a href="menus/<%= menu._id %>">
-                                <button class="menuButton hvr-grow">
-                                    <i class="fa fa-utensils fa-fw"></i><%= menu.name %>
-                                </button>
-                            </a>
-                            <h6>Menu By: <span class="user"><%= menu.user.username %></span></h6>
-                        </div>
-                    <% } %>
-                <% }); %>
+    <div class="ui vertical stripe segment">
+        <div class="ui middle aligned container">
+            <h1 class="ui header">Browse Community Menus</h1>
+            <% if (menus) { %>
+                <div class="ui link cards">
+                    <% menus.forEach(function(menu){ %>
+                        <% if (menu.user.username !== currentUser.username) { %>
+                            <div class="card">
+                                <a class="ui big primary button" href="menus/<%= menu._id %>"><i class="fa fa-utensils"></i></a>
+                                <div class="content">
+                                    <div class="header">
+                                        <h2 class="ui header"><%= menu.name %></h2>
+                                    </div>
+                                    <div class="meta">
+                                        <span class="user"><%= menu.user.username %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% }); %>
+                </div>
+            <% } %>
         </div>
     </div>
 </section>

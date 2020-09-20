@@ -1,11 +1,14 @@
 <%- include('../../partials/header') %>
 
-<div class="container">
-    <div class="menuCard">
-        <form action="/menus" method="POST">
-            <label for="menuName">Name your Menu:</label>
-            <input type="text" id="menuName" name="menu[name]" placeholder="My Home Cousine">
-            <button class="submit hvr-grow">Create Menu</button>
+<div class="ui vertical stripe segment">
+    <div class="ui middle aligned container">
+        <h1 class="ui header">Create New Menu</h1>
+        <form class="ui form" action="/menus" method="POST">
+            <div class="field">
+                <label for="menuName">Name your Menu:</label>
+                <input type="text" id="menuName" name="menu[name]" placeholder="My Home Cousine">
+            </div>
+            <button class="ui big positive button">Save Menu</button>
         </form>
     </div>
 </div>

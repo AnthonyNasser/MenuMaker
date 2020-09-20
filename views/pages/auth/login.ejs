@@ -1,20 +1,40 @@
 <%- include('../../partials/header') %>
 
-<div class="container">
-    <div class="card">
-        <h1>Login</h1>
-        <form action="/login" method="POST">
-            <label for="username">Username</label>
-            <input id="username" name="username" placeholder="Username" type="text" required />
-            <label for="password">Password</label>
-            <input type="password" placeholder="password" id="password" name="password" required />
-            <button class="submit hvr-grow">Log In!</button>
-        </form>
-        <a href="/register">
-            New User? Sign Up Here!
-            <i class="fa fa-check-square fa-fw" aria-hidden="true"></i>
+<div class="ui vertical stripe segment">
+  <div class="ui middle aligned container">
+    <form class="ui form" action="/login" method="POST">
+      <h1 class="ui dividing header">Login</h1>
+      <div class="field">
+        <label for="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          placeholder="Username"
+          type="text"
+          required
+        />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          placeholder="Password"
+          id="password"
+          name="password"
+          required
+        />
+      </div>
+      <div class="field">
+        <button class="ui big primary button">Log In!</button>
+      </div>
+      <div class="field">
+        <a class="ui green tag label" href="/register">
+          New User? Sign Up Here!
+          <i class="fa fa-check-square fa-fw" aria-hidden="true"></i>
         </a>
-    </div>
+      </div>
+    </form>
+  </div>
 </div>
 
 <%- include('../../partials/footer') %>

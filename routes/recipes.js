@@ -9,7 +9,7 @@ const express = require('express'),
 
 
 // INDEX
-router.route('/').get((req, res) => {
+router.get('/', isLoggedIn, (req, res) => {
     Recipe.find({}, function(err, allRecipes){
         res.render('pages/recipes/index', {recipes: allRecipes});
     });
@@ -30,7 +30,6 @@ router.post('/', isLoggedIn, (req, res) => {
             // associate user with recipe
             recipe.user.id = req.user._id;
             recipe.user.username = req.user.username;
-            recipe.save();
             // associate recipe with user
             req.user.recipes.push(recipe);
             req.user.save();

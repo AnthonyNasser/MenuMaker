@@ -6,7 +6,7 @@ const   express = require('express'),
         passport = require("passport"),
         LocalStrategy = require("passport-local"),
         User = require("./models/user.model"),
-        cors = require('cors')
+        cors = require('cors');
 
 require('dotenv').config();
 
@@ -43,7 +43,9 @@ const connectDB = async () => {
     try {
         await mongoose.connect(db, {
             useUnifiedTopology: true,
-            useNewUrlParser: true
+            useNewUrlParser: true,
+            useFindAndModify: false,
+            useCreateIndex: true
         });
         console.log("MongoDB is Connected...");
     } catch (err) {
@@ -64,7 +66,7 @@ app.use(cors(corsOptions));
 
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log('MongoDB Set up Locally');
+    console.log('MongoDB is set up locally');
 });
 
 
