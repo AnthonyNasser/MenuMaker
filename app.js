@@ -58,16 +58,16 @@ connectDB();
 
 // cors origin URL - Allow inbound traffic from origin
 corsOptions = {
-    origin: "Your FrontEnd Website URL",
+    origin: "menumakerv2.herokuapp.com",
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use(cors(corsOptions));
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-    console.log('MongoDB is set up locally');
-});
+// const connection = mongoose.connection;
+// connection.once('open', () => {
+//     console.log('MongoDB is set up locally');
+// });
 
 
 // ROUTES
