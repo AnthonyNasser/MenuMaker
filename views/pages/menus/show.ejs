@@ -1,25 +1,33 @@
 <%- include('../../partials/header') %>
 
-<div class="container">
-    <div class="menuCard">
-        <h1><%= menu.name %></h1>
-        <h5>Menu By: <span class="user"><%= menu.user.username %></span></h5>
-        <hr>
-        <h2>Recipes:</h2>
-        <% if (menu.recipes) { %>
-            <% menu.recipes.forEach(function(recipe){ %>
-                <p><%= recipe.dish_title %></p>
-            <% }); %>
-        <% } %>
-        <h2>Quick Added Dishes:</h2>
-        <% if (menu.quickAdds) { %>
-        <ul>
-            <% menu.quickAdds.forEach(function(quickAdd){ %>
-            <li><%= quickAdd %></li>
-            <% }); %>
-        </ul>
-        <% } %>
+<div class="ui vertical stripe segment">
+  <div class="ui middle aligned container">
+    <h1 class="ui header"><%= menu.name %></h1>
+    <h5>Menu By: <span class="user"><%= menu.user.username %></span></h5>
+    <hr />
+    <div class="ui vertical stripe segment">
+        <div class="ui middle aligned container">
+            <% if (menu.recipes) { %>
+                    <div class="ui link cards">
+                        <% menu.recipes.forEach(function(recipe){ %>
+                            <div class="card">
+                                <div class="content">
+                                    <div class="header">
+                                        <a class="ui mini primary circular icon button" href="/recipes/<%= recipe._id %>">
+                                        <i class="fa fa-info"></i></a>
+                                        <%= recipe.dish_title %>
+                                    </div>
+                                    <div class="extra content">
+                                        <p><i class="fa fa-bread-slice fa-2x"></i></p>
+                                    </div>
+                                </div>  
+                            </div>
+                        <% }); %>
+                    </div>
+            <% } %>
+        </div>
     </div>
+  </div>
 </div>
 
 <%- include('../../partials/footer') %>
