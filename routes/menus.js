@@ -7,15 +7,15 @@ const express = require('express'),
 // =====================
 
 // INDEX
-router.get('/', isLoggedIn, (req, res) => {
-    Menu.find({}, function (err, allMenus) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.render('pages/menus/index', { menus: allMenus });
-        }
-    });
-});
+router.get('/', (req, res) => {
+	Menu.find({}, function (err, allMenus) {
+		if (err) {
+			console.log(err)
+		} else {
+			res.render('pages/menus/index', { menus: allMenus })
+		}
+	})
+})
 
 // NEW
 router.get('/new', isLoggedIn, (req, res) => {
@@ -42,11 +42,11 @@ router.post('/', isLoggedIn, (req, res) => {
 });
 
 // SHOW
-router.get('/:id', (req, res) => {
-    Menu.findById(req.params.id, function (err, menu) {
-        res.render('pages/menus/show', { menu: menu });
-    });
-});
+router.get('/:id', isLoggedIn, (req, res) => {
+	Menu.findById(req.params.id, function (err, menu) {
+		res.render('pages/menus/show', { menu: menu })
+	})
+})
 
 // EDIT
 router.get('/:id/edit', isLoggedIn, (req, res) => {

@@ -44,7 +44,6 @@
             <% if (menus) { %>
                 <div class="ui link cards">
                     <% menus.forEach(function(menu){ %>
-                        <% if (menu.user.username !== currentUser.username) { %>
                             <div class="card">
                                 <a class="ui big primary button" href="menus/<%= menu._id %>"><i class="fa fa-utensils"></i></a>
                                 <div class="content">
@@ -56,7 +55,6 @@
                                     </div>
                                 </div>
                             </div>
-                        <% } %>
                     <% }); %>
                 </div>
             <% } %>

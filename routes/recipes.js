@@ -9,11 +9,11 @@ const express = require('express'),
 
 
 // INDEX
-router.get('/', isLoggedIn, (req, res) => {
-    Recipe.find({}, function(err, allRecipes){
-        res.render('pages/recipes/index', {recipes: allRecipes});
-    });
-});
+router.get('/', (req, res) => {
+	Recipe.find({}, function (err, allRecipes) {
+		res.render('pages/recipes/index', { recipes: allRecipes })
+	})
+})
 
 // NEW
 router.get('/new', isLoggedIn, (req, res) => {

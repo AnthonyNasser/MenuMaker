@@ -1,4 +1,5 @@
 /* Base Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -41,7 +42,7 @@ img#home {
   padding: 5px;
 }
 #content {
-  min-height: 50px;
+  margin: 0;
   text-align: center;
   background: #efefbb; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -111,7 +112,7 @@ button.submit.ui.small.red {
   font-size: 1.33em;
 }
 .ui.vertical.stripe .horizontal.divider {
-  margin: 3em 0em;
+  margin: 2em 0em;
 }
 
 .quote.stripe.segment {
@@ -123,7 +124,11 @@ button.submit.ui.small.red {
 }
 
 .footer.segment {
-  padding: 5em 0em;
+  padding: 5% 0;
+}
+.ui.inverted.vertical.footer.segment {
+  margin-top: auto;
+  margin-bottom: 0;
 }
 
 .secondary.pointing.menu .toc.item {

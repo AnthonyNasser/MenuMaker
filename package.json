@@ -4,7 +4,7 @@
   "description": "This is a web app that allows users to create and share recipes in an easy way.",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Anthony Nasser",

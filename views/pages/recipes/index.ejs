@@ -62,7 +62,6 @@
             <% if (recipes) { %>
                 <div class="ui link cards">
                     <% recipes.forEach(function(recipe){ %>
-                        <% if ((currentUser) && (recipe.user.username !== currentUser.username)) { %>
                             <div class="card">
                                 <div class="image">
                                     <img src="<%= recipe.image %>" alt="recipe image">
@@ -82,8 +81,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <% } %>
-                <% }); %>
+                    <% }); %>
             <% } %>
         </div>
     </div>
